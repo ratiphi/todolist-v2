@@ -9,8 +9,8 @@ app.use(express.urlencoded({
   extended: true
 }));
 app.use(express.static("public"));
-// Connect to MongoDB Atlas
-mongoose.connect("mongodb+srv://admin-tim:Password1234@cluster0.pogdg.mongodb.net/todolistDB");
+// Connect to MongoDB Atlas cloud
+mongoose.connect(`mongodb+srv://admin-tim:${process.env.DBpass}@cluster0.pogdg.mongodb.net/todolistDB`);
 // Connect to local MongoDB
 // mongoose.connect("mongodb://localhost:27017/todolistDB");
 const itemsSchema = new mongoose.Schema({
@@ -142,6 +142,12 @@ app.get("/about", function (req, res) {
   res.render("about");
 });
 
-app.listen(3000, function () {
-  console.log("Server started on port 3000");
+
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+
+app.listen(port, function () {
+  console.log("Server has started successfully!");
 });
