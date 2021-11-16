@@ -1,5 +1,4 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
 const app = express();
@@ -10,8 +9,10 @@ app.use(express.urlencoded({
   extended: true
 }));
 app.use(express.static("public"));
-
-mongoose.connect("mongodb://localhost:27017/todolistDB");
+// Connect to MongoDB Atlas
+mongoose.connect("mongodb+srv://admin-tim:Password1234@cluster0.pogdg.mongodb.net/todolistDB");
+// Connect to local MongoDB
+// mongoose.connect("mongodb://localhost:27017/todolistDB");
 const itemsSchema = new mongoose.Schema({
   name: String
 });
